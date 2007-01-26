@@ -2,5 +2,6 @@
 #labels TODO
 
  * pagination
+ * newly edited posts should not show up on the top of the thread stack
  * admin pages (as seen in side-panel)
  * sbreg finalization (snapboard-registration optional app)
