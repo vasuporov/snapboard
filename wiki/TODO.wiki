@@ -1,0 +1,6 @@
+#summary This page lists the current priorities of the developer.
+#labels TODO
+
+ * pagination
+ * admin pages (as seen in side-panel)
+ * sbreg finalization (snapboard-registration optional app)
