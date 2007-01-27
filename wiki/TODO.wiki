@@ -1,7 +1,7 @@
 #summary This page lists the current priorities of the developer.
 #labels TODO
 
- * pagination
+ * COMPLETED pagination
  * edit posts
    * newly edited posts should not show up on the top of the thread stack
    * interface to see previous versions of edited posts
