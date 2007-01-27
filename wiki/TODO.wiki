@@ -7,3 +7,4 @@
    * interface to see previous versions of edited posts
  * admin pages (as seen in side-panel)
  * sbreg finalization (snapboard-registration optional app)
+ * user avatar images
