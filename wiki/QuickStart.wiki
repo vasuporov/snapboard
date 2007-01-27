@@ -1,0 +1,8 @@
+#summary Get up and running
+
+= Debian Etch =
+
+First, you need to install
+[http://www.djangoproject.com/documentation/install/#installing-the-development-version Django].
+
+Download snapboard.
