@@ -2,6 +2,7 @@
 #labels TODO
 
  * COMPLETED pagination
+ * private posts
  * edit posts
    * newly edited posts should not show up on the top of the thread stack
    * interface to see previous versions of edited posts
