@@ -125,14 +125,14 @@
         {% if user.is_authenticated %}
         <!-- div style="border: 1px solid #ccc; padding: 5px; background: #efe" -->
         <br />
-        <form action="" method="POST">
+        <form id="add_post_div" action="" method="POST">
             Got something to say?
             <br />
             {{ postform.as_p }}
             <input type="submit" value="Post">
         </form>
         {% else %}
-        <p>You need to <a href="/login">sign in</a> to post messages.</p>
+        <p>You need to <a href="/snapboard/signin/?next={{ request.path|urlencode }}#add_post_div">sign in</a> to post messages.</p>
         {% endif %}
     {% endif %}
     {% if thr.closed %}
