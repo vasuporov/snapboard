@@ -1,0 +1,146 @@
+A {
+    text-decoration: none;
+    /* color: #ACB1BF; */
+    color: #099;
+}
+
+HR {
+    height: 1px;
+    background-color: black;
+    border: 0px solid black;
+}
+
+
+#navigation div {
+    text-align: center;
+}
+
+#navigation ul li {
+    list-style: none;
+    /* margin-left: auto; */
+    margin-right: 1em;
+    display: inline;
+}
+
+.errorlist {
+    color: red;
+}
+
+div.index_title {
+    background-color: #D9D4C3;
+    border-bottom: 1px solid #000;
+    padding: 3px;
+}
+
+div.thread {
+    padding: 0.2em 0.5em 0.2em 1em;
+    border-bottom: 1px solid #ccc;
+    /* background: #f9fff6; */
+    background: #E6ECFF;
+    /* background: #ccf; */
+}
+
+div.thread A {
+    color: #066;
+}
+
+div.forummenu{
+    padding: 5px;
+    background: #E6ECFF;
+    border-bottom: 1px solid #ccc;
+    font-size: small;
+}
+
+div.forummenu ul{
+    list-style: none;
+    margin-left: 0;
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+/* FORMS ***************************************/
+
+form {
+    border: 1px solid #ccc;
+    padding: 5px;
+    background: #efe;
+}
+
+form p {
+    padding: 2px;
+}
+
+textarea, input, button, select {
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+/* POSTS & THREADS ***************************************/
+
+hr.postend {
+    width: 80%;
+    height: 1px;
+    background-color: #CCC;
+    border: 0px solid #CCC;
+}
+
+hr.firstpost {
+    width: 80%;
+    height: 1px;
+    background-color: black;
+    border: 0px solid black;
+}
+
+.post p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p.post_header {
+    padding-left: 2em;
+}
+
+p.thread_page_nav {
+    font-size: 77%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+p.index_page_nav {
+    font-size: 77%;
+}
+
+span.thread_menu {
+    font-size: small;
+    float: right;
+}
+
+span.post_menuright {
+    font-size: x-small;
+    padding-right: 10%;
+    float: right;
+}
+
+span.post_menuleft {
+    font-size: x-small;
+    padding-left: 10%;
+}
+
+span.timesince {
+    font-size: small;
+    color:#999;
+}
+
+span.post_summary {
+    color: #B0BFAC;
+}
+
+div.rpc_message {
+    width:"100%";
+    text-align: center;
+}
+
+p.rpc_message {
+    background-color: #f33;
+    border: 1px solid black;
+}

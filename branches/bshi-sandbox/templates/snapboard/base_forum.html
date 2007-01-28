@@ -1,0 +1,114 @@
+<html>
+<head>
+    <title>example.com</title>
+    <link type="text/css" rel="stylesheet" href="/media/css/yui/reset-fonts-grids.css">
+    <link type="text/css" rel="stylesheet" href="/media/css/snapboard.css" />    
+
+    <script src="/media/js/thread.js"></script>
+    <script src="/media/js/yui/yahoo/yahoo-min.js"></script>
+    <script src="/media/js/yui/connection/connection-min.js"></script>
+</head>
+
+<body id="yahoo-com">
+<div id="doc2" class="yui-t4"><!-- "doc" here for example only; use any page width -->
+
+    <div id="hd">
+        <br />
+        {% block site_title %}
+        example.com
+        {% endblock %}
+        <br />
+        <br />
+        <div id="navigation">
+            <ul>
+                <li><a href="/snapboard/threads/"><span>All Discussions</span></a></li>
+                <li><a href="/snapboard/categories/"><span>Categories</span></a></li>
+                <li><a href="/snapboard/favorites/"><span>Favorites</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+
+    <div id="bd">
+        <div id="yui-main">
+            <div class="yui-b">
+                {% block snapboard_header %}
+                {% endblock %}
+                {% block snapboard_main %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="yui-b">
+            {% block side_panel %}
+            <div class="forummenu">
+                {% if user.is_authenticated %}
+                    <p style="font-size: 122%;">
+                        <b><a href="/snapboard/newtopic/">New Topic</a></b>
+                    </p>
+                    <br />
+                    <p>
+                        You are signed in as <a href="#">{{ user.username }}</a>
+                        {% if user.is_staff %}
+                        <b>(STAFF)</b>
+                        {% endif %}
+                    </p>
+                    <br />
+                    <p><a href="/snapboard/signout">Sign out</a></p>
+                {% else %}
+                    <p>You are not logged in.</p>
+                    <br />
+                    {% if form.has_errors %}
+                    <p>Your username and password didn't match.</p>
+                    {% endif %}
+
+                    <form method="post" action="/snapboard/signin/">
+                        {{ login_form.as_p }}
+                        <input type="submit" value="Sign In" />
+                        <input type="hidden" name="next" value="{{ login_next }}" />
+                    </form>
+                    <br />
+
+                    <p>You need to have a user account in order to contribute
+                    to discussions on this forum.</p>
+                    <p style="font-size:small"><a href="/accounts/register/">Register for the Forums</a></p>
+                {% endif %}
+            </div>
+            
+            {% if user.is_staff %}
+                <br />
+                <div class="forummenu">
+                <p><b>Admin Panel</b></p>
+                <ul>
+                    <li>&#187; <i><a href="#">Admin Overview</a></i></li>
+                    <li>&#187; <a href="#">Censored threads</a></li>
+                    <li>&#187; <a href="#">Abuse Reports</a></li>
+                    <li>&#187; <a href="#">Sticky threads</a></li>
+                    <li>&#187; <a href="#">Action Log</a></li>
+                </ul>
+                </div>
+            {% endif %}
+            
+            {% if user.is_authenticated %}
+                <br />
+                <div class="forummenu">
+                <ul>
+                    <li>&#187; <a href="#">Watched Topics<b></a> <br /> <a href="#">(2 new!)</b></a></li>
+                    <li>&#187; <a href="#">Private Posts<b></a> <br /> <a href="#">(4 new!)</b></a></li>
+                </ul>
+                </div>
+                
+                <br />
+                <div class="forummenu">
+                    <p><b><a href="#">Forum Preferences</a></b></p>
+                </div>
+            {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+    <div id="ft">
+        <p>.
+        </p>
+    </div>
+</div>
+</body>
+</html>
