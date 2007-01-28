@@ -2,6 +2,7 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+from fields import PhotoField
 
 # Create your models here.
 
@@ -109,7 +110,7 @@ class ForumUserData(models.Model):
     nickname = models.CharField(maxlength=32)
     posts = models.IntegerField()
     profile = models.TextField()
-    # avatar (15x15 xpm/svg)
+    avatar = PhotoField(width_field=15, height_field=15, null=True, blank=True)
     # signature (hrm... waste of space IMHO)
 
     ppp = models.IntegerField()
