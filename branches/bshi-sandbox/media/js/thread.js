@@ -32,14 +32,15 @@ function revision(orig_id, show_id) {
             links_html = '';
 
             if(res['prev_id'] !== '') {
-                // links_html += '<a href="#post' + orig_id '" onClick="revision(\'';
-                links_html += '<a href="#" onClick="revision(\'';
+                links_html += '<a href="#post' + orig_id + '" onClick="revision(\'';
+                //links_html += '<a href="#" onClick="revision(\'';
                 links_html += orig_id + '\',\'' + res['prev_id'];
                 links_html += '\');">&#171; previous</a>';
             }
-            links_html += ' This message has been revised '
+            links_html += ' <b style="color: #c00;">This message has been revised</b> '
             if(res['rev_id'] !== '') {
-                links_html += '<a href="#" onClick="revision(\'';
+                links_html += '<a href="#post' + orig_id + '" onClick="revision(\'';
+                //links_html += '<a href="#" onClick="revision(\'';
                 links_html += orig_id + '\',\'' + res['rev_id'];
                 links_html += '\');">next &#187;</a>';
             }

@@ -17,8 +17,6 @@ def rpc_post(request):
     orig_id = int(request.GET['orig'])
     post = Post.objects.get(pk=show_id)
 
-    print request.GET
-
     prev_id = ''
     rev_id = ''
     if post.revision is not None:
@@ -30,7 +28,6 @@ def rpc_post(request):
             'prev_id': prev_id,
             'rev_id': rev_id,
             }
-    print resp
     return HttpResponse(simplejson.dumps(resp), mimetype='application/javascript')
 
 
