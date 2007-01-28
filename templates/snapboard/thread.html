@@ -100,7 +100,7 @@
             <span id="post_revision_links{{ post.id }}" class="post_menuleft">
                 {# redirect is not possible here in the href property below since it resets the page #}
                 {# need to do it w/ javascript #}
-                <a href="#" onClick="revision('{{ post.id }}','{{ post.previous.id }}');">&#171; previous</a>
+                <a href="#post{{ post.id }}" onClick="revision('{{ post.id }}','{{ post.previous.id }}');">&#171; previous</a>
                 <b style="color: #c00">This message has been revised</b>
             </span>
             <br />
