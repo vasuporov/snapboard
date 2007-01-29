@@ -71,10 +71,12 @@ class Post(models.Model):
     freespeech = models.BooleanField(default=False) # superuser level access
 
     def save(self):
-        if self.previous == None:
-            self.odate = datetime.now()
-        else:
+        if self.previous is not None:
             self.odate = self.previous.odate
+        elif self.odate is None:
+            # the above if important; we don't want to update the odate if the
+            # object is being modified
+            self.odate = datetime.now()
         super(Post, self).save()
 
     def get_absolute_url(self):
