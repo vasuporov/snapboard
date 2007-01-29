@@ -22,11 +22,12 @@ class Category(models.Model):
     class Admin:
         pass
 
+## TODO: currently not used
 class Moderator(models.Model):
     user = models.ForeignKey(User)
     category = models.ForeignKey(Category)
-    class Admin:
-        list_display = ('user', 'category')
+    #class Admin:
+    #    list_display = ('user', 'category')
 
 class Thread(models.Model):
     subject = models.CharField(maxlength=80)
@@ -45,6 +46,8 @@ class Thread(models.Model):
 
     class Admin:
         list_display = ('subject', 'category')
+        list_filter    = ('category', 'closed', 'csticky', 'gsticky')
+        search_fields  = ('subject',)
 
 class Post(models.Model):
     """
@@ -91,6 +94,8 @@ class Post(models.Model):
 
     class Admin:
         list_display = ('user', 'date', 'thread', 'ip')
+        list_filter    = ('censor', 'freespeech', 'user',)
+        search_fields  = ('text', 'user')
 
 
 class AbuseList(models.Model):
@@ -115,8 +120,7 @@ class WatchList(models.Model):
     """
     user = models.ForeignKey(User)
     thread = models.ForeignKey(Thread)
-    class Admin:
-        pass
+    # no need to be in the admin
 
 class ForumUserData(models.Model):
     user = models.OneToOneField(User)
