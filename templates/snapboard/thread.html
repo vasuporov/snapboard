@@ -127,10 +127,10 @@
     </div>
 
     {% include "snapboard/page_navigation.html" %}
+    <br />
     {% if not thr.closed and not page_next%}
         {% if user.is_authenticated %}
         <!-- div style="border: 1px solid #ccc; padding: 5px; background: #efe" -->
-        <br />
         <form id="add_post_div" action="" method="POST">
             Got something to say?
             <br />
@@ -142,7 +142,6 @@
         {% endif %}
     {% endif %}
     {% if thr.closed %}
-        <br />
         <p>This discussion has been closed by the staff.  You can no longer add posts.</p>
     {% endif %}
 

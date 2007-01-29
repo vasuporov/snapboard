@@ -109,7 +109,7 @@ def thread(request, thread_id, page="1"):
 
     # this must come after the post so new messages show up
     try:
-        post_list = Post.objects.filter(thread=thr).order_by('date').exclude(
+        post_list = Post.objects.filter(thread=thr).order_by('odate').exclude(
                 revision__isnull=False)
 
         # get any avatars
