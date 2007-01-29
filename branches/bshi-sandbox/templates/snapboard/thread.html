@@ -76,6 +76,9 @@
             </span>
 
             <!-- [ICON] -->
+            {% if post.avatar %}
+                <img src="/media/{{ post.avatar }}" />
+            {% endif %}
             <b>
                 <a href="#" onclick="toggle_post('{{ post.id }}');">
                     <span title="POPUP" class="popup">{{ post.user }}</span>

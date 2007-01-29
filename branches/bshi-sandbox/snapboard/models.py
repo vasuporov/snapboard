@@ -1,10 +1,8 @@
 from django.db import models
-
+from django.conf import settings
 from django.contrib.auth.models import User
 
 from fields import PhotoField
-
-# Create your models here.
 
 class Category(models.Model):
     label = models.CharField(maxlength=32)
@@ -110,7 +108,8 @@ class ForumUserData(models.Model):
     nickname = models.CharField(maxlength=32)
     posts = models.IntegerField()
     profile = models.TextField()
-    avatar = PhotoField(width_field=15, height_field=15, null=True, blank=True)
+    avatar = PhotoField(upload_to='img/snapboard/avatars/',
+            width=20, height=20)
     # signature (hrm... waste of space IMHO)
 
     ppp = models.IntegerField()

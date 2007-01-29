@@ -112,6 +112,15 @@ def thread(request, thread_id, page="1"):
         post_list = Post.objects.filter(thread=thr).order_by('date').exclude(
                 revision__isnull=False)
 
+        # get any avatars
+        extra_post_avatar = """
+            SELECT avatar FROM snapboard_forumuserdata
+                WHERE snapboard_forumuserdata.user_id = snapboard_post.user_id
+            """
+        post_list = post_list.extra( select = {
+            'avatar': extra_post_avatar
+            })
+
         if request.user.is_authenticated() and not request.user.is_staff:
             post_list = post_list.exclude(censor=True)
 
