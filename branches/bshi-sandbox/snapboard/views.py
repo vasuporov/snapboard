@@ -167,7 +167,7 @@ def paginate_context(paginator, page):
         }
 
 
-def edit_post(request, original):
+def edit_post(request, original, next=None):
     '''
     Edit an original post.
     '''
@@ -178,6 +178,7 @@ def edit_post(request, original):
         orig_post = Post.objects.get(pk=int(original))
     except Post.DoesNotExist:
         raise Http404
+
 
     postform = PostForm(request.POST.copy())
     if postform.is_valid():
@@ -194,11 +195,20 @@ def edit_post(request, original):
         orig_post.revision = post
         orig_post.save()
 
-        return HttpResponseRedirect('/snapboard/threads/id/'
-                + str(orig_post.thread.id) + '/')
+        div_id_num = post.id
+        #return HttpResponseRedirect('/snapboard/threads/id/'
+        #        + str(orig_post.thread.id) + '/')
     else:
-        return HttpResponseRedirect('/snapboard/threads/id/'
-                + str(orig_post.thread.id) + '/')
+        #return HttpResponseRedirect('/snapboard/threads/id/'
+        #        + str(orig_post.thread.id) + '/')
+        div_id_num = orig_post.id
+
+    try:
+        next = request.POST['next'] + '#post' + str(div_id_num)
+    except KeyError:
+        next = '/snapboard/threads/id/' + str(orig_post.thread.id) + '/'
+
+    return HttpResponseRedirect(next)
 
 
 def new_thread(request):
