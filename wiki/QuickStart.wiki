@@ -1,8 +1,6 @@
 #summary Get up and running
+ Because snapboard runs on the Django framework, a host of installation options (database selection, CGI/mod_python, etc) are available.  This document does not attempt to be a comprehensive guide on all the options available to you to run snapboard.  For that, a careful reading of the [http://www.djangoproject.com/documentation/install/ Django installation document] is a good start.
+
+ This guide attempts to cover a few common use cases.
 
 = Debian Etch =
-
-First, you need to install
-[http://www.djangoproject.com/documentation/install/#installing-the-development-version Django].
-
-Download snapboard.
