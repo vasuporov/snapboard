@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 from fields import PhotoField
 
@@ -22,15 +22,14 @@ class Category(models.Model):
     class Admin:
         pass
 
-## TODO: currently not used
+
 class Moderator(models.Model):
-    user = models.ForeignKey(User)
     category = models.ForeignKey(Category)
-    #class Admin:
-    #    list_display = ('user', 'category')
+    user = models.ForeignKey(User)
+
 
 class Thread(models.Model):
-    subject = models.CharField(maxlength=80)
+    subject = models.CharField(maxlength=160)
     category = models.ForeignKey(Category)
 
     closed = models.BooleanField(default=False)
@@ -46,14 +45,32 @@ class Thread(models.Model):
 
     class Admin:
         list_display = ('subject', 'category')
-        list_filter    = ('category', 'closed', 'csticky', 'gsticky')
-        search_fields  = ('subject',)
+
+
+class CategoryAccessControlList(models.Model):
+    category = models.ForeignKey(Category)
+    user = models.ForeignKey(User)
+    group = models.ForeignKey(Group)
+
+    read = models.BooleanField(default = True)
+    write = models.BooleanField(default = True)
+    censor = models.BooleanField(default = False)
+    close = models.BooleanField(default = False)
+
+    # unique on category and user or category and group
+    class Admin:
+        list_display = ('category', 'user', 'group', 'read', 'write', 'censor')
+        list_filter = ('category', 'group', 'read', 'write', 'censor', 'close')
+
+    class Meta:
+        unique_together = (('category', 'user', 'group'),)
+
 
 class Post(models.Model):
     """
-    Logins are integrated into the post form.  If you aren't logged in and
-    authentication is required, a username/password entry will be integrated
-    into the post form.  Otherwise, business as usual.
+    Post objects store information about revisions.
+
+    Both forward and backward revisions are stored as ForeignKeys.
     """
     user = models.ForeignKey(User)
     thread = models.ForeignKey(Thread)
@@ -122,24 +139,34 @@ class WatchList(models.Model):
     thread = models.ForeignKey(Thread)
     # no need to be in the admin
 
+## TODO: currently unused
 class ForumUserData(models.Model):
+    '''
+    User data tied to user accounts from the auth module.
+
+    Real name, email, and date joined information are stored in the built-in
+    auth module.
+    '''
     user = models.OneToOneField(User)
-    nickname = models.CharField(maxlength=32)
-    posts = models.IntegerField()
-    profile = models.TextField()
+    profile = models.TextField(blank=True)
     avatar = PhotoField(upload_to='img/snapboard/avatars/',
             width=20, height=20)
     # signature (hrm... waste of space IMHO)
 
-    ppp = models.IntegerField()
-
+    # browsing options
+    ppp = models.IntegerField(null=True)
     notify_email = models.BooleanField(default=False)
-    reverse_date_disp = models.BooleanField(default=False)
-    # frontpage_filter
-    class Admin:
-        pass
+    reverse_posts = models.BooleanField("Display Newest Posts First", default=False)
+    frontpage_filters = models.ManyToManyField(Category)
 
-    # class Meta:
-    #     permissions = (
-    #         ("moderator", "Forum Moderator Status"),
-    #     )
+    class Admin:
+        fields = (
+            (None, 
+                {'fields': ('user', 'avatar',)}),
+            ('Profile', 
+                {'fields': ('profile',)}),
+            ('Browsing Options', 
+                {'fields': 
+                    ('ppp', 'notify_email', 'reverse_posts', 'frontpage_filters',)}),
+        )
+

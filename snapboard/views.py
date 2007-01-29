@@ -288,7 +288,7 @@ def base_thread_queryset(qset=None):
         },).order_by('-gsticky', '-date')
 
 
-@decorators.user_passes_test(lambda u: u.is_authenticated(), login_url=SB_LOGIN_URL)
+#@decorators.user_passes_test(lambda u: u.is_authenticated(), login_url=SB_LOGIN_URL)
 def favorite_index(request, page=1):
     '''
     This page shows the threads/discussions that have been marked as 'watched'
@@ -323,11 +323,13 @@ def favorite_index(request, page=1):
     return render_to_response('snapboard/thread_index.html',
             render_dict,
             context_instance=RequestContext(request, processors=[login_context,]))
+favorite_index = decorators.user_passes_test(lambda u: u.is_authenticated(), login_url=SB_LOGIN_URL)(favorite_index)
 
 
-@decorators.user_passes_test(lambda u: u.is_authenticated(), login_url=SB_LOGIN_URL)
+#@decorators.user_passes_test(lambda u: u.is_authenticated(), login_url=SB_LOGIN_URL)
 def private_index(request, page=1):
     pass
+private_index = decorators.user_passes_test(lambda u: u.is_authenticated(), login_url=SB_LOGIN_URL)(private_index)
 
 
 def thread_index(request, cat_id=None, page=1):
