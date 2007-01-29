@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -58,6 +60,7 @@ class Post(models.Model):
     # private (list of usernames)
 
     # (null or ID of post - most recent revision is always a diff of previous)
+    odate = models.DateTimeField(editable=False, null=True)
     revision = models.ForeignKey("self", related_name="rev",
             editable=False, null=True, blank=True)
     previous = models.ForeignKey("self", related_name="prev",
@@ -66,6 +69,13 @@ class Post(models.Model):
     # (boolean set by mod.; true if abuse report deemed false)
     censor = models.BooleanField(default=False) # moderator level access
     freespeech = models.BooleanField(default=False) # superuser level access
+
+    def save(self):
+        if self.previous == None:
+            self.odate = datetime.now()
+        else:
+            self.odate = self.previous.odate
+        super(Post, self).save()
 
     def get_edit_form(self):
         from forms import PostForm
