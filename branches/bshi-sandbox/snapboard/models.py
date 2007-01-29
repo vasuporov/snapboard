@@ -34,10 +34,10 @@ class Thread(models.Model):
 
     closed = models.BooleanField(default=False)
 
-    # (Boolean, "Category sticky - will show up at the top of category listings.")
+    # Category sticky - will show up at the top of category listings.
     csticky = models.BooleanField(default=False)
 
-    # (Boolean, "Global sticky - will show up at the top of home listing.")
+    # Global sticky - will show up at the top of home listing.
     gsticky = models.BooleanField(default=False)
 
     def __str__(self):
@@ -45,6 +45,7 @@ class Thread(models.Model):
 
     class Admin:
         list_display = ('subject', 'category')
+        list_filter = ('closed', 'csticky', 'gsticky', 'category')
 
 
 class CategoryAccessControlList(models.Model):
