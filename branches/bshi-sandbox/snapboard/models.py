@@ -77,6 +77,9 @@ class Post(models.Model):
             self.odate = self.previous.odate
         super(Post, self).save()
 
+    def get_absolute_url(self):
+        return '/threads/id/' + str(self.thread.id)
+
     def get_edit_form(self):
         from forms import PostForm
         return PostForm(initial={'post':self.text})

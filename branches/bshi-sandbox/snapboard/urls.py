@@ -5,6 +5,12 @@ from views import edit_post, rpc, signout, signin
 from views import favorite_index
 
 from rpc import rpc_post
+from feeds import LatestPosts
+
+feeds = {
+    'latest': LatestPosts,
+    }
+
 
 urlpatterns = patterns('',
     (r'^$', thread_index),
@@ -24,4 +30,7 @@ urlpatterns = patterns('',
     # RPC
     (r'^rpc/action/$', rpc),
     (r'^rpc/postrev/$', rpc_post),
+
+    # feeds
+    (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
 )
