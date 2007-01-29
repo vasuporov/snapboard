@@ -4,12 +4,12 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import simplejson
 
-# template filters for post text
-from django.contrib.markup.templatetags.markup import textile
+#from django.contrib.markup.templatetags.markup import textile
 from django.template.defaultfilters import striptags
 
-from models import Thread, Post, Category, WatchList, AbuseList
 from forms import PostForm, ThreadForm
+from models import Thread, Post, Category, WatchList, AbuseList
+from templatetags.textile import textile
 
 
 def rpc_post(request):
