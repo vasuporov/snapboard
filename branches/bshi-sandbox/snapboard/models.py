@@ -6,6 +6,8 @@ from django.contrib.auth.models import User, Group
 
 from fields import PhotoField
 
+# TODO: banlist model
+
 class Category(models.Model):
     label = models.CharField(maxlength=32)
 
@@ -74,7 +76,7 @@ class Post(models.Model):
     Both forward and backward revisions are stored as ForeignKeys.
     """
     user = models.ForeignKey(User)
-    thread = models.ForeignKey(Thread)
+    thread = models.ForeignKey(Thread, core=True, edit_inline=models.STACKED, num_in_admin=1)
     text = models.TextField()
     date = models.DateTimeField(editable=False,auto_now_add=True)
     ip = models.IPAddressField()
