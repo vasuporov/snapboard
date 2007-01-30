@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 from models import Category
 
+
 class PostForm(forms.Form):
     post = forms.CharField(
             label = '',

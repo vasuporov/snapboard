@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 
 from views import thread, thread_index, new_thread, category_index
 from views import edit_post, rpc, signout, signin
-from views import favorite_index
+from views import favorite_index, profile
 
 from rpc import rpc_post
 from feeds import LatestPosts
@@ -14,6 +14,7 @@ feeds = {
 
 urlpatterns = patterns('',
     (r'^$', thread_index),
+    (r'^profile/$', profile),
     (r'^signout/$', signout),
     (r'^signin/$', signin),
     (r'^newtopic/$', new_thread),
