@@ -1,3 +1,5 @@
+# vim: ai ts=4 sts=4 et sw=4
+
 from datetime import datetime
 
 from django.db import models
@@ -6,7 +8,13 @@ from django.contrib.auth.models import User, Group
 
 from fields import PhotoField
 
+## NOTES
 # TODO: banlist model
+#
+# Field option editable=False works as advertised in the Admin pages but
+# does not hide form fields when used with newforms and the functions
+# form_from_model() and form_from_instance():
+#   http://code.djangoproject.com/ticket/3247
 
 class Category(models.Model):
     label = models.CharField(maxlength=32)
@@ -96,9 +104,8 @@ class Post(models.Model):
     def save(self):
         if self.previous is not None:
             self.odate = self.previous.odate
-        elif self.odate is None:
-            # the above if important; we don't want to update the odate if the
-            # object is being modified
+        elif not self.id:
+            # only do the following on creation, not modification
             self.odate = datetime.now()
         super(Post, self).save()
 
@@ -150,17 +157,22 @@ class ForumUserData(models.Model):
     Real name, email, and date joined information are stored in the built-in
     auth module.
     '''
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User, unique=True, editable=False)
     profile = models.TextField(blank=True)
     avatar = PhotoField(upload_to='img/snapboard/avatars/',
             width=20, height=20)
     # signature (hrm... waste of space IMHO)
 
     # browsing options
-    ppp = models.IntegerField(null=True)
-    notify_email = models.BooleanField(default=False)
-    reverse_posts = models.BooleanField("Display Newest Posts First", default=False)
-    frontpage_filters = models.ManyToManyField(Category)
+    ppp = models.IntegerField(null=True,
+            help_text = "Posts per page")
+    notify_email = models.BooleanField(default=False,
+            help_text = "Email notifications for watched discussions")
+    reverse_posts = models.BooleanField(
+            default=False,
+            help_text = "Display Newest Posts First")
+    frontpage_filters = models.ManyToManyField(Category,
+            help_text = "Filter your front page on these categories")
 
     class Admin:
         fields = (
