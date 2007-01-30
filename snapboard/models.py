@@ -157,8 +157,12 @@ class ForumUserData(models.Model):
     Real name, email, and date joined information are stored in the built-in
     auth module.
     '''
-    user = models.ForeignKey(User, unique=True, editable=False)
+    user = models.ForeignKey(User, unique=True, editable=False,
+            core=True, edit_inline=models.STACKED, max_num_in_admin=1)
     profile = models.TextField(blank=True)
+
+    ## views.profile(...) does not handle this properly:
+    # http://code.djangoproject.com/ticket/3297
     avatar = PhotoField(upload_to='img/snapboard/avatars/',
             width=20, height=20)
     # signature (hrm... waste of space IMHO)
@@ -174,14 +178,15 @@ class ForumUserData(models.Model):
     frontpage_filters = models.ManyToManyField(Category,
             help_text = "Filter your front page on these categories")
 
-    class Admin:
-        fields = (
-            (None, 
-                {'fields': ('user', 'avatar',)}),
-            ('Profile', 
-                {'fields': ('profile',)}),
-            ('Browsing Options', 
-                {'fields': 
-                    ('ppp', 'notify_email', 'reverse_posts', 'frontpage_filters',)}),
-        )
+    ## edit inline
+    # class Admin:
+    #     fields = (
+    #         (None, 
+    #             {'fields': ('user', 'avatar',)}),
+    #         ('Profile', 
+    #             {'fields': ('profile',)}),
+    #         ('Browsing Options', 
+    #             {'fields': 
+    #                 ('ppp', 'notify_email', 'reverse_posts', 'frontpage_filters',)}),
+    #     )
 
