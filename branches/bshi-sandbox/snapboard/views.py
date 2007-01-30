@@ -462,6 +462,10 @@ def profile(request, next='/'):
     the model definition;  this is a bug:
 
         http://code.djangoproject.com/ticket/3247
+
+    ForumUserData.avatar does not render properly in newforms:
+
+        http://code.djangoproject.com/ticket/3297
     '''
     user = request.user
 
