@@ -75,6 +75,11 @@ textarea, input, button, select {
     background: #fff;
 }
 
+#autocomplete_div .highlight {
+    background: yellow;
+    text-decoration: bold;
+}
+
 /* POSTS & THREADS ***************************************/
 
 hr.postend {
