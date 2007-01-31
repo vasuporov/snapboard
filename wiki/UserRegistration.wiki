@@ -1,0 +1,9 @@
+#summary Email-based account registration application
+
+= Introduction =
+
+*sbreg* is an optional application you can use provides account registration capabilities (assuming you  have access to a mail server on the host).  This application is based on James Bennet's excellent article:
+
+http://www.b-list.org/weblog/2006/09/02/django-tips-user-registration
+
+*sbreg* has been adapted to use `newforms`
