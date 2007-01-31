@@ -24,7 +24,10 @@
             <ul>
                 <li><a href="/snapboard/threads/"><span>All Discussions</span></a></li>
                 <li><a href="/snapboard/categories/"><span>Categories</span></a></li>
+                {% if user.is_authenticated %}
                 <li><a href="/snapboard/favorites/"><span>Favorites</span></a></li>
+                <li><a href="#"><span>Private Posts</span></a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -41,7 +44,7 @@
         </div>
         <div class="yui-b">
             {% block side_panel %}
-            <div class="forummenu">
+            <div class="forummenu-first">
                 {% if user.is_authenticated %}
                     <p style="font-size: 122%;">
                         <b><a href="/snapboard/newtopic/">New Topic</a></b>
@@ -106,9 +109,18 @@
             {% endif %}
             {% endblock %}
         </div>
+
     </div>
     <div id="ft">
+        <br />
+        <div style="text-align:center; font-size: 85%;">
+            <a href="http://validator.w3.org/check/referer" title="Check the validity of this site&#8217;s XHTML">xhtml</a> &nbsp; 
+            <a href="http://jigsaw.w3.org/css-validator/check/referer" title="Check the validity of this site&#8217;s CSS">css</a> &nbsp; 
+        </div>
+        <br />
     </div>
 </div>
 </body>
 </html>
+
+
