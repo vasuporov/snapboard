@@ -160,6 +160,8 @@ class ForumUserData(models.Model):
 
     Real name, email, and date joined information are stored in the built-in
     auth module.
+
+    After logging in, save these values in a session variable.
     '''
     user = models.ForeignKey(User, unique=True, editable=False,
             core=True, edit_inline=models.STACKED, max_num_in_admin=1)
@@ -173,7 +175,11 @@ class ForumUserData(models.Model):
 
     # browsing options
     ppp = models.IntegerField(null=True, blank=True,
+            choices = ((5, '5'), (10, '10'), (20, '20'), (50, '50')),
             help_text = "Posts per page")
+    tpp = models.IntegerField(null=True, blank=True,
+            choices = ((5, '5'), (10, '10'), (20, '20'), (50, '50')),
+            help_text = "Threads per page")
     notify_email = models.BooleanField(default=False, blank=True,
             help_text = "Email notifications for watched discussions")
     reverse_posts = models.BooleanField(

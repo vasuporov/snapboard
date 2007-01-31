@@ -70,7 +70,7 @@ div.forummenu ul{
 form {
     border: 1px solid #ccc;
     padding: 5px;
-    background: #efe;
+    background: #e4efe2;
 }
 
 textarea, input, button, select {
@@ -78,6 +78,16 @@ textarea, input, button, select {
     margin-bottom: 5px;
     margin-top: 5px;
     background: #fff;
+}
+
+textarea, input[type="text"] {
+    width: 100%;
+}
+
+input[type="submit"] {
+    background-color: #ccc;
+    color: black;
+    border: 1px solid black;
 }
 
 #autocomplete_div .highlight {
