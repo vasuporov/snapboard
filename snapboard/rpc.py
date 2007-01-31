@@ -31,6 +31,15 @@ def rpc_post(request):
     return HttpResponse(simplejson.dumps(resp), mimetype='application/javascript')
 
 
+def rpc_lookup(request, queryset, field, limit=5):
+    obj_list = []
+    lookup = { '%s__icontains' % field: request.GET['query'],}
+    for obj in queryset.filter(**lookup)[:limit]:
+                obj_list.append({"id": obj.id, "name": getattr(obj, field)}) 
+    object = {"ResultSet": { "total": str(limit), "Result": obj_list } }
+    return HttpResponse(simplejson.dumps(object), mimetype='application/javascript')
+
+
 def rpc_csticky(request, **kwargs):
     assert(request.user.is_staff)
     assert('thread' in kwargs, 'rpc_csticky() requires "thread"')
