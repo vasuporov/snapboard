@@ -210,6 +210,7 @@ def edit_post(request, original, next=None):
         post = Post(
                 user = request.user,
                 thread = orig_post.thread,
+                private = orig_post.private,
                 text = postform.clean_data['post'],
                 ip = request.META.get('REMOTE_ADDR', ''),
                 previous = orig_post,
