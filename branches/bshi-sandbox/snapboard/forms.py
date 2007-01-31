@@ -33,7 +33,8 @@ class PostForm(forms.Form):
         for r in recipients:
             # make sure recipients exist
             try:
-                cleandata.append(str(User.objects.get(username=r).id))
+                if len(r) > 0:
+                    cleandata.append(str(User.objects.get(username=r).id))
             except User.DoesNotExist:
                 raise ValidationError(r + " is not a valid user.")
 
