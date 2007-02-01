@@ -49,7 +49,7 @@ div.forummenu, .forummenu-first{
     /* background: #E6ECFF; */
     background: #CDD;
     border-bottom: 1px solid #999;
-    font-size: small;
+    font-size: 85%;
 }
 
 .forummenu-first {
@@ -97,6 +97,22 @@ input[type="submit"] {
 
 /* POSTS & THREADS ***************************************/
 
+/* TEXTILE ***************************************/
+.post_text p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.post_text blockquote {
+    margin-left: 1em;
+    margin-right: 1em;
+    background:#EEEEEE none repeat scroll 0%;
+    border-left:1px solid #336633;
+    margin-left:1em;
+    margin-right:1em;
+    padding:5px 10px
+}
+
 hr.postend {
     width: 80%;
     height: 1px;
@@ -111,10 +127,6 @@ hr.firstpost {
     border: 0px solid black;
 }
 
-.post p {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
 
 p.post_header {
     padding-left: 2em;
@@ -131,23 +143,23 @@ p.index_page_nav {
 }
 
 span.thread_menu {
-    font-size: small;
+    font-size: 85%;
     float: right;
 }
 
 span.post_menuright {
-    font-size: x-small;
+    font-size: 77%;
     padding-right: 10%;
     float: right;
 }
 
 span.post_menuleft {
-    font-size: x-small;
+    font-size: 77%;
     padding-left: 10%;
 }
 
 span.timesince {
-    font-size: small;
+    font-size: 85%;
     color:#999;
 }
 
