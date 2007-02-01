@@ -123,6 +123,9 @@ def thread(request, thread_id, page="1"):
     page = int(page)        # indexed starting at 1
     pindex = page - 1       # indexed starting at 0
 
+    from middleware import threadlocals
+    print threadlocals.get_current_ip(), type(threadlocals.get_current_ip())
+
     try:
         thr = Thread.objects.get(pk=thread_id)
     except Thread.DoesNotExist:
@@ -148,7 +151,7 @@ def thread(request, thread_id, page="1"):
                     user = user,
                     text = postform.clean_data['post'],
                     private = postform.clean_data['private'],
-                    ip = request.META.get('REMOTE_ADDR', ''))
+                    )
             postobj.save()
             postform = PostForm()
     else:
@@ -164,8 +167,9 @@ def thread(request, thread_id, page="1"):
         # filter out the private messages.  admin cannot see private messages
         # (although they can use the Django admin interface to do so)
         # TODO: there's gotta be a better way to filter out private messages
+        # Tested with postgresql only so far
         post_list = post_list.filter(
-                Q(user__exact=user) |
+                Q(user__id__exact=user.id) |
                 Q(private__exact='') |
                 Q(private__endswith=idstr[2]) |
                 Q(private__startswith=idstr[0]) |
@@ -226,7 +230,6 @@ def edit_post(request, original, next=None):
                 thread = orig_post.thread,
                 private = orig_post.private,
                 text = postform.clean_data['post'],
-                ip = request.META.get('REMOTE_ADDR', ''),
                 previous = orig_post,
                 )
         post.save()
@@ -268,7 +271,6 @@ def new_thread(request):
                     user = request.user,
                     thread = thread,
                     text = threadform.clean_data['post'],
-                    ip = request.META.get('REMOTE_ADDR', ''),
                     )
             post.save()
 
@@ -516,3 +518,4 @@ def profile(request, next='/'):
             context_instance=RequestContext(request))
 profile = snapboard_require_signin(profile)
 
+# vim: ai ts=4 sts=4 et sw=4

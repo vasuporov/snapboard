@@ -17,3 +17,4 @@ def post_summary(value, arg):
         return value[:l] + '...'
 
 register.filter('post_summary', post_summary)
+# vim: ai ts=4 sts=4 et sw=4

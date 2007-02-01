@@ -17,6 +17,7 @@ def rpc_post(request):
     orig_id = int(request.GET['orig'])
     post = Post.objects.get(pk=show_id)
 
+
     prev_id = ''
     rev_id = ''
     if post.revision is not None:
@@ -112,3 +113,4 @@ def rpc_censor(request, **kwargs):
         return {'link':'uncensor', 'msg':'This post is censored!'}
     else:
         return {'link':'censor', 'msg':'This post is no longer censored.'}
+# vim: ai ts=4 sts=4 et sw=4
