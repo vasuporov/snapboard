@@ -1,11 +1,12 @@
 function toggle_post(id) {
-    toggle('sum'+id, 'inline');
-    toggle('post'+id, 'block');
+    toggle('snap_post_sum'+id, 'inline');
+    toggle('snap_post_view'+id, 'block');
 }
 
 function toggle_edit(id) {
-    toggle('post_text'+id, 'block');
-    toggle('post_edit'+id, 'block');
+    //toggle('post_text'+id, 'block');
+    toggle('snap_post_text'+id, 'block');
+    toggle('snap_post_edit'+id, 'block');
 }
 
 function toggle(id, type) {
@@ -49,7 +50,7 @@ function revision(orig_id, show_id) {
     };
 
     var handleFailure = function(o) {
-        var errordiv = document.getElementById("thread_rpc_msg_div");
+        var errordiv = document.getElementById("thread_rpc_feedback");
         if(o.responseText !== undefined) {
             for (var n in o) {
                 if (o.hasOwnProperty(n)) {
@@ -88,7 +89,7 @@ function toggle_variable(action, oclass, oid, msgdivid) {
     };
 
     var handleFailure = function(o) {
-        var errordiv = document.getElementById("thread_rpc_msg_div");
+        var errordiv = document.getElementById("thread_rpc_feedback");
         if(o.responseText !== undefined) {
             div.innerHTML = "<b>ERROR</b>";
             for (var n in o) {
@@ -110,11 +111,11 @@ function toggle_variable(action, oclass, oid, msgdivid) {
 }
 
 // thread level functions
-function set_csticky(id) { toggle_variable('csticky', 'thread', id, 'thread_rpc_msg_div'); }
-function set_gsticky(id) { toggle_variable('gsticky', 'thread', id, 'thread_rpc_msg_div'); }
-function set_watch(id) { toggle_variable('watch', 'thread', id, 'thread_rpc_msg_div'); }
-function set_close(id) { toggle_variable('close', 'thread', id, 'thread_rpc_msg_div'); }
+function set_csticky(id) { toggle_variable('csticky', 'thread', id, 'thread_rpc_feedback'); }
+function set_gsticky(id) { toggle_variable('gsticky', 'thread', id, 'thread_rpc_feedback'); }
+function set_watch(id) { toggle_variable('watch', 'thread', id, 'thread_rpc_feedback'); }
+function set_close(id) { toggle_variable('close', 'thread', id, 'thread_rpc_feedback'); }
 
 // post level function
-function set_censor(id) { toggle_variable('censor', 'post', id, ('post_rpc_msg_div' + id));}
-function set_abuse(id) { toggle_variable('abuse', 'post', id, ('post_rpc_msg_div' + id));}
+function set_censor(id) { toggle_variable('censor', 'post', id, ('post_rpc_feedback' + id));}
+function set_abuse(id) { toggle_variable('abuse', 'post', id, ('post_rpc_feedback' + id));}
