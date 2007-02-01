@@ -80,7 +80,7 @@ textarea, input, button, select {
     background: #fff;
 }
 
-textarea, input[type="text"] {
+textarea, input[type="text"], input[type="password"] {
     width: 100%;
 }
 
@@ -92,7 +92,7 @@ input[type="submit"] {
 
 #autocomplete_div .highlight {
     background: yellow;
-    text-decoration: bold;
+    font-weight: bold;
 }
 
 /* POSTS & THREADS ***************************************/
@@ -156,7 +156,7 @@ span.post_summary {
 }
 
 div.rpc_message {
-    width:"100%";
+    width: 100%;
     text-align: center;
 }
 
