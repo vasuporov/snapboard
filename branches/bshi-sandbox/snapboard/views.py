@@ -4,6 +4,7 @@ from django import newforms as forms
 from django.contrib.auth import decorators
 from django.contrib.auth import login, logout
 from django.core.paginator import ObjectPaginator, InvalidPage
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseServerError
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -128,22 +129,23 @@ def thread(request, thread_id, page="1"):
         raise Http404
 
     render_dict = {}
+    user = request.user
 
-    if request.user.is_authenticated():
+    if user.is_authenticated():
         try:
-            wl = WatchList.objects.get(user=request.user, thread=thr)
-            print 'watched is true for', request.user, thr, wl
+            wl = WatchList.objects.get(user=user, thread=thr)
+            print 'watched is true for', user, thr, wl
             render_dict.update({"watched":True})
         except WatchList.DoesNotExist:
             render_dict.update({"watched":False})
 
-    if request.user.is_authenticated() and request.POST:
+    if user.is_authenticated() and request.POST:
         postform = PostForm(request.POST.copy())
 
         if postform.is_valid():
             # reset post object
             postobj = Post(thread = thr,
-                    user = request.user,
+                    user = user,
                     text = postform.clean_data['post'],
                     private = postform.clean_data['private'],
                     ip = request.META.get('REMOTE_ADDR', ''))
@@ -154,8 +156,20 @@ def thread(request, thread_id, page="1"):
 
     # this must come after the post so new messages show up
     try:
+        uid = str(user.id)
+        idstr = (uid + ',', ',' + uid + ',', ',' + uid)
         post_list = Post.objects.filter(thread=thr).order_by('odate').exclude(
                 revision__isnull=False)
+       
+        # filter out the private messages.  admin cannot see private messages
+        # (although they can use the Django admin interface to do so)
+        # TODO: there's gotta be a better way to filter out private messages
+        post_list = post_list.filter(
+                Q(user__exact=user) |
+                Q(private__exact='') |
+                Q(private__endswith=idstr[2]) |
+                Q(private__startswith=idstr[0]) |
+                Q(private__contains=idstr[1]))
 
         # get any avatars
         extra_post_avatar = """
@@ -166,7 +180,7 @@ def thread(request, thread_id, page="1"):
             'avatar': extra_post_avatar
             })
 
-        if request.user.is_authenticated() and not request.user.is_staff:
+        if user.is_authenticated() and not user.is_staff:
             post_list = post_list.exclude(censor=True)
 
         paginator = ObjectPaginator(post_list, PPP)
