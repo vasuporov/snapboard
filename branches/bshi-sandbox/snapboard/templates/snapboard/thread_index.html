@@ -31,7 +31,7 @@
             </p>
             <span style="color: #677; font-size: small; float:right;">
                 last updated
-                <span class="datetime">{{ thread.date|date:"r" }}</span>
+                <span class="datetime">{{ thread.date|date:"r T" }}</span>
                 {% ifnotequal thread.last_poster thread.starter %}
                 by {{ thread.last_poster }}
                 {% endifnotequal %}
