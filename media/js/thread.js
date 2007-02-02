@@ -183,12 +183,11 @@ Date.prototype.toTimeSinceString = function(nLimit, sBetween, sLastBetween){
 }
 
 
+function getElementsByClassName(oElm, strTagName, strClassName){
 /*
     Written by Jonathan Snook, http://www.snook.ca/jonathan
     Add-ons by Robert Nyman, http://www.robertnyman.com
 */
-
-function getElementsByClassName(oElm, strTagName, strClassName){
     var arrElements = (strTagName == "*" && oElm.all)? oElm.all : oElm.getElementsByTagName(strTagName);
     var arrReturnElements = new Array();
     strClassName = strClassName.replace(/\-/g, "\\-");
@@ -202,6 +201,7 @@ function getElementsByClassName(oElm, strTagName, strClassName){
     }
     return (arrReturnElements)
 }
+
 
 function procAllTimeSince() {
     elst = getElementsByClassName(document, 'span', 'datetime')
