@@ -56,25 +56,6 @@ class Thread(models.Model):
         list_filter = ('closed', 'csticky', 'gsticky', 'category')
 
 
-class CategoryAccessControlList(models.Model):
-    category = models.ForeignKey(Category)
-    user = models.ForeignKey(User)
-    group = models.ForeignKey(Group)
-
-    read = models.BooleanField(default = True)
-    write = models.BooleanField(default = True)
-    censor = models.BooleanField(default = False)
-    close = models.BooleanField(default = False)
-
-    # unique on category and user or category and group
-    class Admin:
-        list_display = ('category', 'user', 'group', 'read', 'write', 'censor')
-        list_filter = ('category', 'group', 'read', 'write', 'censor', 'close')
-
-    class Meta:
-        unique_together = (('category', 'user', 'group'),)
-
-
 class Post(models.Model):
     """
     Post objects store information about revisions.
