@@ -297,6 +297,7 @@ def base_thread_queryset(qset=None):
 
     # number of posts in thread
     # censored threads don't count toward the total
+    # TODO: private threads DO count for total; fix it
     extra_post_count = """
         SELECT COUNT(*) FROM snapboard_post
             WHERE snapboard_post.thread_id = snapboard_thread.id
@@ -304,7 +305,7 @@ def base_thread_queryset(qset=None):
             AND NOT snapboard_post.censor
         """
 
-    # figure out who started the population
+    # figure out who started the discussion
     extra_starter = """
         SELECT username FROM auth_user
             WHERE auth_user.id = (SELECT user_id
@@ -485,10 +486,12 @@ def profile(request, next='/'):
     the model definition;  this is a bug:
 
         http://code.djangoproject.com/ticket/3247
+        # patch attached to ticket currently fixes problem
 
     ForumUserData.avatar does not render properly in newforms:
 
         http://code.djangoproject.com/ticket/3297
+        # patch does not apply cleanly
     '''
     user = request.user
 
