@@ -1,6 +1,6 @@
 {% extends "snapboard/base_forum.html" %}
 
-{% load extras %} {# also includes textile #}
+{% load extras %}
 
 {% block snapboard_main %}
     <div id="thread_rpc_feedback" class="rpc_message">
@@ -62,7 +62,7 @@
                     {% endifequal %}
                     {% if user.is_staff %}
                     <span title="ADMIN: mark this post for censorship" class="popup">
-                        <a id="censor{{ post.id }}" href="#" onClick="set_censor('{{ post.id }}');">
+                        <a id="censor{{ post.id }}" href="#snap_post{{ post.id }}" onClick="set_censor('{{ post.id }}');">
                             {{ post.censor|yesno:"uncensor,censor" }}
                         </a>
                     </span>
@@ -70,7 +70,7 @@
                     {% endif %}
                     {% if user.is_authenticated %}
                     <span title="Report this post for violation of forum policies." class="popup">
-                        <a id="abuse{{ post.id }}" href="#" onClick="set_abuse('{{ post.id }}');">&#149; report abuse</a>
+                        <a id="abuse{{ post.id }}" href="#snap_post{{ post.id }}" onClick="set_abuse('{{ post.id }}');">&#149; report abuse</a>
                     </span>
                     {% endif %}
                 </span>
@@ -99,7 +99,7 @@
 
             <div style="display:block" id="snap_post_view{{ post.id }}">
                 <div class="post_text" style="display:block" id="snap_post_text{{ post.id }}">
-                    {{ post.text|striptags|textile }}
+                    {{ post.text|striptags|markdown:"safe" }}
                 </div>
                 {% if post.previous %}
                 <span id="post_revision_links{{ post.id }}" class="post_menuleft">
