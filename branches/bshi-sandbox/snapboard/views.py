@@ -242,7 +242,7 @@ def edit_post(request, original, next=None):
         div_id_num = orig_post.id
 
     try:
-        next = request.POST['next'] + '#post' + str(div_id_num)
+        next = request.POST['next'].split('#')[0] + '#snap_post' + str(div_id_num)
     except KeyError:
         next = '/snapboard/threads/id/' + str(orig_post.thread.id) + '/'
 

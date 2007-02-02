@@ -103,8 +103,6 @@
                 </div>
                 {% if post.previous %}
                 <span id="post_revision_links{{ post.id }}" class="post_menuleft">
-                    {# redirect is not possible here in the href property below since it resets the page #}
-                    {# need to do it w/ javascript #}
                     <a href="#snap_post_view{{ post.id }}" onClick="revision('{{ post.id }}','{{ post.previous.id }}');">&#171; previous</a>
                     <b style="color: #c00">This message has been revised</b>
                 </span>
@@ -130,36 +128,6 @@
 
     {% include "snapboard/page_navigation.html" %}
     <br />
-    {% if not thr.closed and not page_next%}
-        {% if user.is_authenticated %}
-        <!-- div style="border: 1px solid #ccc; padding: 5px; background: #efe" -->
-        <form id="add_post_div" action="" method="POST">
-            <script type="text/javascript" src="/media/js/yui/event-min.js"></script>
-            <script type="text/javascript" src="/media/js/yui/autocomplete-min.js"></script>
-            Got something to say?
-            <br />
-            <p>{{ postform.post }} {{ postform.post.errors }}</p>
-            <p id="autocomplete_p"><a href="#add_post_div" onClick="toggle('autocomplete_input', 'block'); toggle('autocomplete_p', 'inline');">set private recipients</a></p>
-            <div id="autocomplete_input" style="display:none">
-                <p>{{ postform.private }}{{ postform.private.errors }}</p>
-                <div id="autocomplete_div" style="padding-right: 1em; position:relative; top: -6px; z-index: 4000; background-color:#cfc; color:#333; border: 1px solid black;"></div>
-                <script type="text/javascript">
-                    dataSource = new YAHOO.widget.DS_XHR("/snapboard/rpc/user_lookup/", ["ResultSet.Result","name","id"]);
-                    autoComp = new YAHOO.widget.AutoComplete("id_private","autocomplete_div",dataSource);
-                    autoComp.delimChar = ","; 
-                    autoComp.typeAhead = true;
-                    autoComp.highlightClassName = "highlight";
-                </script>
-            </div>
-
-            <input type="submit" value="Post">
-        </form>
-        {% else %}
-        <p>You need to <a href="/snapboard/signin/?next={{ request.path|urlencode }}#add_post_div">sign in</a> to post messages.</p>
-        {% endif %}
-    {% endif %}
-    {% if thr.closed %}
-        <p>This discussion has been closed by the staff.  You can no longer add posts.</p>
-    {% endif %}
+    {% include "snapboard/addpost.html" %}
 
 {% endblock %}
