@@ -108,17 +108,18 @@ class Post(models.Model):
     freespeech = models.BooleanField(default=False) # superuser level access
 
     def save(self):
-        # TODO this doesn't seem to integrate properly
-        from middleware import threadlocals
+        # # TODO this doesn't seem to integrate properly
+        # from middleware import threadlocals
 
-        # hack to disallow setting arbitrary users to posts
-        if getattr(self, 'user_id', None) is None:
-            self.user_id = threadlocals.get_current_user().id
+        # # hack to disallow setting arbitrary users to posts
+        # if getattr(self, 'user_id', None) is None:
+        #     self.user_id = threadlocals.get_current_user().id
 
-        # disregard any modifications to ip address
-        print 'user =', threadlocals.get_current_user()
-        print threadlocals.get_current_ip(), type(threadlocals.get_current_ip())
-        self.ip = threadlocals.get_current_ip()
+        # # disregard any modifications to ip address
+        # print 'user =', threadlocals.get_current_user()
+        # print threadlocals.get_current_ip(), type(threadlocals.get_current_ip())
+        # self.ip = threadlocals.get_current_ip()
+        self.ip = '127.0.0.1'
 
         if self.previous is not None:
             self.odate = self.previous.odate
