@@ -12,6 +12,7 @@ from django.contrib.auth import login, logout
 from models import UserProfile
 from forms import RegistrationForm, LoginForm
 
+CONFIRM_REDIRECT = Site.objects.get(pk=settings.SITE_ID).domain
 
 def register(request):
     if request.user.is_authenticated():
@@ -73,4 +74,4 @@ def confirm(request, activation_key):
     user_account = user_profile.user 
     user_account.is_active = True 
     user_account.save() 
-    return render_to_response('sbreg/confirm.html', {'success': True})
+    return render_to_response('sbreg/confirm.html', {'success': True, 'next': CONFIRM_REDIRECT})

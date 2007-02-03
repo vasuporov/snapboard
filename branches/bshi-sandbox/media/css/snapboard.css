@@ -11,17 +11,6 @@ HR {
 }
 
 
-#navigation div {
-    text-align: center;
-}
-
-#navigation ul li {
-    list-style: none;
-    /* margin-left: auto; */
-    margin-right: 1em;
-    display: inline;
-}
-
 .errorlist {
     color: red;
 }
@@ -63,31 +52,6 @@ div.forummenu ul{
     margin-left: 0;
     padding-left: 1em;
     text-indent: -1em;
-}
-
-/* FORMS ***************************************/
-
-form {
-    border: 1px solid #ccc;
-    padding: 5px;
-    background: #e4efe2;
-}
-
-textarea, input, button, select {
-    border: 1px solid #ccc;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    background: #fff;
-}
-
-textarea, input[type="text"], input[type="password"] {
-    width: 100%;
-}
-
-input[type="submit"] {
-    background-color: #ccc;
-    color: black;
-    border: 1px solid black;
 }
 
 #autocomplete_div .highlight {
