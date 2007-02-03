@@ -12,7 +12,7 @@ from django.contrib.auth import login, logout
 from models import UserProfile
 from forms import RegistrationForm, LoginForm
 
-CONFIRM_REDIRECT = Site.objects.get(pk=settings.SITE_ID).domain
+CONFIRM_REDIRECT = 'http://' + Site.objects.get(pk=settings.SITE_ID).domain
 
 def register(request):
     if request.user.is_authenticated():
@@ -39,7 +39,7 @@ def register(request):
 
             site_name = Site.objects.get(pk=settings.SITE_ID).domain
             confirm_url = 'http://' + site_name + '/accounts/confirm/' + activation_key
-            reply_address = 'nobody@' + site_name
+            reply_address = '<nobody@' + site_name.split(':')[0] + '>'
 
             email_body = ''.join(
                     (
