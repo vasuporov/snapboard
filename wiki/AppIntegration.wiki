@@ -25,9 +25,10 @@
 
  * For url mappings, add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
 
-
+{{{
     'webapps.snapboard.views.snapboard_default_context',
-  
+}}}
+
 4. Sync'd up the db.
 
 5. Run a local server via manage.py runserver.
@@ -37,7 +38,6 @@ Logged in, hit the forum link and it worked like a charm.
 All in all, good experience with getting the app integrated into my
 site.  Next steps will be to get the media files installed into my
 environment so that it looks pretty.  I'll let you know how that goes. 
-
 
 
 
