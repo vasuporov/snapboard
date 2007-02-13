@@ -22,8 +22,18 @@ For comments, questions and concerns, please see the Google [http://groups.googl
     SNAP_PREFIX = '/forums'
     SNAP_MEDIA_PREFIX = MEDIA_URL + '/media'
 }}}
-   
    These manage the url mappings inside the views and templates.
+
+ * Modify `MIDDLEWARE_CLASSES` to include snapboard middleware:
+{{{
+MIDDLEWARE_CLASSES = (
+    ...
+
+    # SNAPboard middleware
+    'examplesite.snapboard.middleware.threadlocals.ThreadLocals',
+)
+}}}
+
  * To make sure that the two SNAP variables get processed correctly, you need to add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
 {{{
     'webapps.snapboard.views.snapboard_default_context',
