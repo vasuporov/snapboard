@@ -36,8 +36,4 @@ This doc will help get you started with integrating Snapboard into your existing
 
 5. Run a local server via manage.py runserver.
 
-Logged in, hit the forum link and it worked like a charm.
-
-All in all, good experience with getting the app integrated into my
-site.  Next steps will be to get the media files installed into my
-environment so that it looks pretty.  I'll let you know how that goes. 
+At this point, you should be able to log in and play around with the app.  Have fun.
