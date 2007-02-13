@@ -1,13 +1,9 @@
-This doc will help get you started with integrating Snapboard into your existing django project.
+ This doc will help get you started with integrating Snapboard into your existing django project.  This will only cover snapboard and n
 
-1. Moved the snapboard app directory into my projects directory.
+1. Moved the snapboard app directory into django projects directory.
 
-I won't be using sbreg initially, as I hit upon the same blog post
-it's based off of and I have my own version of a registration module.
-After looking at sbreg, there's little difference right now between
-the two.
 
-2. Added the following to my project urls.py:
+2. Added the appropriate url mappings to url.py.  A good example would be:
 
 {{{
     # forums
@@ -15,16 +11,24 @@ the two.
     (r'^forums/', include('webapps.snapboard.urls')),
 }}}
 
-Catching both urls makes sense based upon previous experience running
-forums.  People always muddle up the url and either add or remove the
-s.
 
-3. Added snapboard to installed apps.
+3. In settings.py, you need to add the following:
 
+ * Add snapboard to installed apps variable.
+
+ * Add the following variables:
+
+{{{
+    SNAP_PREFIX = '/forums'
+    SNAP_MEDIA_PREFIX = MEDIA_URL + '/media'
+}}}
+
+ * For url mappings, add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
+
+
+    'webapps.snapboard.views.snapboard_default_context',
+  
 4. Sync'd up the db.
-
-There's a bug when you sync up and you answer no to populating the
-test data into the db.  I'll file a bug in a few with a patch.
 
 5. Run a local server via manage.py runserver.
 
@@ -33,5 +37,7 @@ Logged in, hit the forum link and it worked like a charm.
 All in all, good experience with getting the app integrated into my
 site.  Next steps will be to get the media files installed into my
 environment so that it looks pretty.  I'll let you know how that goes. 
+
+
 
 
