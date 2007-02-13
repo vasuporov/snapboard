@@ -5,7 +5,6 @@ This doc will help get you started with integrating Snapboard into your existing
 
 
 2. Added the appropriate url mappings to url.py.  A good example would be:
-
 {{{
     # forums
     (r'^forum/', include('webapps.snapboard.urls')),
@@ -16,26 +15,39 @@ This doc will help get you started with integrating Snapboard into your existing
 3. In settings.py, you need to do the following:
 
  * Add snapboard to installed apps variable.
-
  * Add the following variables:
-
 {{{
     SNAP_PREFIX = '/forums'
     SNAP_MEDIA_PREFIX = MEDIA_URL + '/media'
 }}}
    
    These manage the url mappings inside the views and templates.
-
  * To make sure that the two SNAP variables get processed correctly, you need to add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
-
 {{{
     'webapps.snapboard.views.snapboard_default_context',
 }}}
 
    Make sure that when you do this, you also define the defaults for this variable as indicated in the [http://www.djangoproject.com/documentation/settings/#template-context-processors variable documentation].  This is not made clear when you read the django documentation.
+
+   The default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the following:
+{{{
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.auth",
+    "django.core.context_processors.request",
+
+    # SNAPboard processors
+    "examplesite.snapboard.views.snapboard_default_context",
+)
+}}}
+
 4. Sync'd up the db.
 
 5. Run a local server via manage.py runserver.
 
 At this point, you should be able to log in and play around with the app.  Have fun.
+
+
+
+
+
 
