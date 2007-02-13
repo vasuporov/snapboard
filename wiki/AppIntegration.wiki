@@ -23,6 +23,8 @@ This doc will help get you started with integrating Snapboard into your existing
     SNAP_PREFIX = '/forums'
     SNAP_MEDIA_PREFIX = MEDIA_URL + '/media'
 }}}
+   
+   These manage the url mappings inside the views and templates.
 
  * For url mappings, add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
 
