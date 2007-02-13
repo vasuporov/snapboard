@@ -32,8 +32,10 @@ This doc will help get you started with integrating Snapboard into your existing
     'webapps.snapboard.views.snapboard_default_context',
 }}}
 
+   Make sure that when you do this, you also define the defaults for this variable as indicated in the [http://www.djangoproject.com/documentation/settings/#template-context-processors variable documentation].  This is not made clear when you read the django documentation.
 4. Sync'd up the db.
 
 5. Run a local server via manage.py runserver.
 
 At this point, you should be able to log in and play around with the app.  Have fun.
+
