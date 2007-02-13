@@ -18,13 +18,16 @@ For comments, questions and concerns, please see the Google [http://groups.googl
 
  * Add snapboard to installed apps variable.
  * Add the following variables:
+
 {{{
     SNAP_PREFIX = '/forums'
     SNAP_MEDIA_PREFIX = MEDIA_URL + '/media'
 }}}
+   
    These manage the url mappings inside the views and templates.
 
  * Modify `MIDDLEWARE_CLASSES` to include snapboard middleware:
+
 {{{
 MIDDLEWARE_CLASSES = (
     ...
@@ -35,13 +38,13 @@ MIDDLEWARE_CLASSES = (
 }}}
 
  * To make sure that the two SNAP variables get processed correctly, you need to add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
+
 {{{
     'webapps.snapboard.views.snapboard_default_context',
 }}}
 
-   Make sure that when you do this, you also define the defaults (as you need them) for this variable as indicated in the [http://www.djangoproject.com/documentation/settings/#template-context-processors variable documentation].
-
    There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the following for snapboard:
+
 {{{
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.auth",
@@ -52,11 +55,17 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 }}}
 
+    For more info, check out the settings [http://www.djangoproject.com/documentation/settings/#template-context-processors documentation].
+
 4. Sync'd up the db.
 
 5. Run a local server via manage.py runserver.
 
 At this point, you should be able to log in and play around with the app.  Have fun.
+
+
+
+
 
 
 
