@@ -13,7 +13,7 @@ This doc will help get you started with integrating Snapboard into your existing
 }}}
 
 
-3. In settings.py, you need to add the following:
+3. In settings.py, you need to do the following:
 
  * Add snapboard to installed apps variable.
 
