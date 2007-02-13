@@ -1,4 +1,6 @@
-This doc will help get you started with integrating Snapboard into your existing django project.  For comments, questions and concerns, please see the Google [http://groups.google.com/group/snapboard-discuss Group].
+# Overview of steps to integrate SNAPboard into an existing Django project
+
+For comments, questions and concerns, please see the Google [http://groups.google.com/group/snapboard-discuss Group].
 
 
 1. Move the snapboard app directory into your django projects directory.
@@ -27,9 +29,9 @@ This doc will help get you started with integrating Snapboard into your existing
     'webapps.snapboard.views.snapboard_default_context',
 }}}
 
-   Make sure that when you do this, you also define the defaults for this variable as indicated in the [http://www.djangoproject.com/documentation/settings/#template-context-processors variable documentation].  This is not made clear when you read the django documentation.
+   Make sure that when you do this, you also define the defaults (as you need them) for this variable as indicated in the [http://www.djangoproject.com/documentation/settings/#template-context-processors variable documentation].
 
-   The default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the following:
+   There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the following for snapboard:
 {{{
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.auth",
@@ -45,7 +47,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 5. Run a local server via manage.py runserver.
 
 At this point, you should be able to log in and play around with the app.  Have fun.
-
 
 
 
