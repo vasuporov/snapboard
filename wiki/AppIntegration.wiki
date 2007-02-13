@@ -1,4 +1,4 @@
-# Overview of steps to integrate SNAPboard into an existing Django project
+#summary Overview of steps to integrate SNAPboard into an existing Django project
 
 For comments, questions and concerns, please see the Google [http://groups.google.com/group/snapboard-discuss Group].
 
@@ -47,7 +47,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 5. Run a local server via manage.py runserver.
 
 At this point, you should be able to log in and play around with the app.  Have fun.
-
 
 
 
