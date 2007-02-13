@@ -26,7 +26,7 @@ This doc will help get you started with integrating Snapboard into your existing
    
    These manage the url mappings inside the views and templates.
 
- * For url mappings, add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
+ * To make sure that the two SNAP variables get processed correctly, you need to add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
 
 {{{
     'webapps.snapboard.views.snapboard_default_context',
