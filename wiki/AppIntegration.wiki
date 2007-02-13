@@ -40,7 +40,7 @@ MIDDLEWARE_CLASSES = (
  * To make sure that the two SNAP variables get processed correctly, you need to add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
 
 {{{
-    'webapps.snapboard.views.snapboard_default_context',
+    'examplesite.snapboard.views.snapboard_default_context',
 }}}
 
    There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the following for snapboard:
@@ -62,7 +62,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 5. Run a local server via manage.py runserver.
 
 At this point, you should be able to log in and play around with the app.  Have fun.
-
 
 
 
