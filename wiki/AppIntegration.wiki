@@ -1,4 +1,5 @@
-This doc will help get you started with integrating Snapboard into your existing django project.  This will only cover snapboard and n
+This doc will help get you started with integrating Snapboard into your existing django project.  For comments, questions and concerns, please see the Google [http://groups.google.com/group/snapboard-discuss Group].
+
 
 1. Moved the snapboard app directory into django projects directory.
 
@@ -38,5 +39,4 @@ Logged in, hit the forum link and it worked like a charm.
 All in all, good experience with getting the app integrated into my
 site.  Next steps will be to get the media files installed into my
 environment so that it looks pretty.  I'll let you know how that goes. 
-
 
