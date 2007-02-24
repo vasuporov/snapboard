@@ -224,4 +224,28 @@ class ForumUserData(models.Model):
     #                 ('ppp', 'notify_email', 'reverse_posts', 'frontpage_filters',)}),
     #     )
 
+
+from django.core.mail import send_mass_mail
+from django.template import Context, loader
+def notify_watch_thread(sender, instance, signal, *args, **kwargs):
+        """
+    Sends an email out to a number of people informing them
+    of a new blog entry.
+    """
+    recipient_list = None; # TODO
+
+    # get the mail body template and render it
+    t = loader.get_template('blog/watched_notify.txt')
+    c = Context({'post': instance})
+    message = t.render(c)
+
+    subject = '%s updated conversation notification' % ()
+    from_email = 'notify@' % (domain_name)
+    recipient_list = get_recipient_list()
+
+    email = (subject, message, from_email, recipient_list)
+    send_mass_mail(email)
+
+dispatcher.connect(notify_watch_thread, sender=Post, signal=signals.post_save)
+
 # vim: ai ts=4 sts=4 et sw=4
