@@ -54,6 +54,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
    ^1^ There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need `auth` and `request`.  For more information see the Djano settings [http://www.djangoproject.com/documentation/settings/#template-context-processors documentation].
 
+Finally, add `examplesite.snapboard` to the list of `INSTALLED_APPS`.
+
 == Voila! ==
 
 At this point, you can sync up and deploy.
@@ -70,7 +72,15 @@ Optionally, if you want the snapboard account registration application, you can 
 $ ln -s /path/to/snapboard_trunk/sbreg /path/to/django/exampleproject
 }}}
 
-*Don't forget to add "_exampleproject_.`sbreg`" to your application list in your settings file.*
+Add `sbreg` to your urls (`urls.py`):
+{{{
+    (r'^accounts/', include('sbreg.urls')),
+}}}
+
+And add it to your list of installed applications (`settings.py`):
+{{{
+    'examplesite.sbreg',
+}}}
 
 == URLs ==
 You don't have to use `/snapboard` as your base URL.  A good alternative is:
