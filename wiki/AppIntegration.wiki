@@ -85,10 +85,7 @@ If that's okay, you don't need to do anything.  If you've moved the media files 
 
 == Templates ==
 *This section is incomplete*
-SNAPboard templates are designed to be as flexible as possible.  It is very easy to override them.
-
-
-
+SNAPboard templates are designed to be as flexible as possible.  It is very easy to override them.  We've tried to use the same template block variable names as the admin templates, so you should be comfortable doing small customizations.  Larger changes like layout changes should also be relatively straightforward.
 
 
 
