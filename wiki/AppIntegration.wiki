@@ -1,9 +1,9 @@
 #summary Overview of steps to integrate SNAPboard into an existing Django project
-#labels Featured
+#labels Featured,Phase-Deploy
 
 For comments, questions and concerns, please see the Google [http://groups.google.com/group/snapboard-discuss Group].
 
-So you've got some Django project up and running - well, adding SNAPboard is a snap!  You just need to make a few symbolic links and make some minor edits to the `urls.py` and `settings.py` project files.
+So you've got some Django project up and running - well, adding SNAPboard is a snap!  You just need to make a few symbolic links and minor changes to your Django settings and URLs.
 
 = Recommended Setup =
 
@@ -19,9 +19,9 @@ $ ln -s `pwd`/snapboard_trunk/sbreg /path/to/django/exampleproject
 }}}
 
 == urls.py ==
-Edit your project urls (exampleproject/url.py):
+Edit your project urls (exampleproject/url.py) so the the following tuple is included:
 {{{
- (r'^snapboard/', include('exampleproject.snapboard.urls')),
+    (r'^snapboard/', include('exampleproject.snapboard.urls')),
 }}}
 
 == settings.py ==
@@ -47,7 +47,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 }}}
 
-   ^1^ There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the `auth` and `request`.  For more information, see the settings [http://www.djangoproject.com/documentation/settings/#template-context-processors documentation].
+   ^1^ There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the `auth` and `request`.  For more information see the Djano settings [http://www.djangoproject.com/documentation/settings/#template-context-processors documentation].
 
 == Voila! ==
 
@@ -62,14 +62,13 @@ $ cd /path/to/exampleproject; python manage.py syncdb
 == URLs ==
 You don't have to use `/snapboard` as your base URL.  A good alternative is:
 {{{
-    # forums
     (r'^forum/', include('webapps.snapboard.urls')),
     (r'^forums/', include('webapps.snapboard.urls')),
 }}}
 
-But you need to set some additional SNAPboard variables in `settings.py`, e.g. for the urls above, you would need to set `SNAP_PREFIX`
+In this case, you need to set some additional SNAPboard variables in `settings.py`, e.g. for the urls above, you would need to set `SNAP_PREFIX` such that
 {{{
-SNAP_PREFIX = '/forums'    
+SNAP_PREFIX = '/forums'    # note the lack of a trailing slash
 }}}
 
 == Media Files ==
