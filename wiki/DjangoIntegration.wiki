@@ -1,21 +1,21 @@
-#summary Overview of steps to integrate SNAPboard into an existing Django project
+#summary Overview of steps to integrate snapboard into an existing Django project
 #labels Featured,Phase-Deploy
 
 For comments, questions and concerns, please see the Google [http://groups.google.com/group/snapboard-discuss Group].
 
-So you've got some Django project up and running - well, adding SNAPboard is a snap!  You just need to make a few symbolic links and minor changes to your Django settings and URLs.
+So you've got some Django project up and running - well, adding snapboard is a snap!  You just need to make a few symbolic links and minor changes to your Django settings and URLs.
 
 = Recommended Setup =
 
-Check out a copy of SNAPboard and make a symbolic link.
+Check out a copy of snapboard and make a symbolic link to the application in your project directory.
 {{{
 $ svn checkout http://snapboard.googlecode.com/svn/trunk/ snapboard_trunk
 $ ln -s `pwd`/snapboard_trunk/snapboard /path/to/django/exampleproject
 }}}
 
-Optionally, if you want the snapboard account registration application, you can add another symbolic link:
+Create a symbolic link your media directory pointing to snapboard media files.
 {{{
-$ ln -s `pwd`/snapboard_trunk/sbreg /path/to/django/exampleproject
+$ ln -s `pwd`/snapboard_trunk/media /path/to/django/media/snapboard
 }}}
 
 == urls.py ==
@@ -25,6 +25,11 @@ Edit your project urls (exampleproject/url.py) so the the following tuple is inc
 }}}
 
 == settings.py ==
+Tell snapboard where the media files are:
+{{{
+SNAP_MEDIA_PREFIX = MEDIA_URL + '/media/snapboard'
+}}}
+
 Modify `MIDDLEWARE_CLASSES` to include snapboard middleware:
 {{{
 MIDDLEWARE_CLASSES = (
@@ -34,7 +39,7 @@ MIDDLEWARE_CLASSES = (
 )
 }}}
 
-To make sure that the two SNAP variables get processed correctly, you need to modify the `TEMPLATE_CONTEXT_PROCESSORS` setting^1^:
+You then need to modify the `TEMPLATE_CONTEXT_PROCESSORS` setting^1^:
 {{{
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.auth",
@@ -57,7 +62,15 @@ $ cd /path/to/exampleproject; python manage.py syncdb
 }}}
 
 
-= Extra Customization =
+= Extras =
+
+== Account Registration ==
+Optionally, if you want the snapboard account registration application, you can create a symbolic link in your project directory pointing to the `sbreg` application.
+{{{
+$ ln -s /path/to/snapboard_trunk/sbreg /path/to/django/exampleproject
+}}}
+
+*Don't forget to add "_exampleproject_.`sbreg`" to your application list in your settings file.*
 
 == URLs ==
 You don't have to use `/snapboard` as your base URL.  A good alternative is:
@@ -66,13 +79,13 @@ You don't have to use `/snapboard` as your base URL.  A good alternative is:
     (r'^forums/', include('webapps.snapboard.urls')),
 }}}
 
-In this case, you need to set some additional SNAPboard variables in `settings.py`, e.g. for the urls above, you would need to set `SNAP_PREFIX` such that
+In this case, you need to set an additional snapboard variable in `settings.py`, e.g. for the urls above, you would need to set `SNAP_PREFIX` such that
 {{{
 SNAP_PREFIX = '/forums'    # note the lack of a trailing slash
 }}}
 
 == Media Files ==
-SNAPboard will accept an additional setting to specify a custom media location.  The default is:
+snapboard will accept a setting to specify a custom media location.  The default is:
 {{{
 SNAP_MEDIA_PREFIX = MEDIA_URL + '/media'
 }}}
