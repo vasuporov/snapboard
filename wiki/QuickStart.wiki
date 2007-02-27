@@ -22,5 +22,10 @@ SNAPboard will install a temporary database at `/tmp/examplesite.db`.  If you us
 Point your browser to http://localhost:8000/snapboard to see it in action!
 
 = Debian Etch =
-(AKA my development setup)
-TODO
+I use Etch - it's easy to get an environment to test things out:
+
+{{{
+$ apt-get install python-imaging subversion python-pysqlite2
+}}}
+
+Then [http://www.djangoproject.com/documentation/install/ install Django].
