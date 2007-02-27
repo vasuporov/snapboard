@@ -52,7 +52,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 }}}
 
-   ^1^ There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the `auth` and `request`.  For more information see the Djano settings [http://www.djangoproject.com/documentation/settings/#template-context-processors documentation].
+   ^1^ There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need `auth` and `request`.  For more information see the Djano settings [http://www.djangoproject.com/documentation/settings/#template-context-processors documentation].
 
 == Voila! ==
 
