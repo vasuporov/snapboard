@@ -2,48 +2,45 @@
 
 For comments, questions and concerns, please see the Google [http://groups.google.com/group/snapboard-discuss Group].
 
+So you've got some Django project up and running - well, adding SNAPboard is a snap!  You just need to make a few symbolic links and make some minor edits to the `urls.py` and `settings.py` project files.
 
-1. Move the snapboard app directory into your django projects directory.
+= Recommended Setup =
 
-
-2. Added the appropriate url mappings to url.py.  A good example would be:
+Check out a copy of SNAPboard and make a symbolic link.
 {{{
-    # forums
-    (r'^forum/', include('webapps.snapboard.urls')),
-    (r'^forums/', include('webapps.snapboard.urls')),
+$ svn checkout http://snapboard.googlecode.com/svn/trunk/ snapboard_trunk
+$ ln -s `pwd`/snapboard_trunk/snapboard /path/to/django/exampleproject
 }}}
 
-
-3. In settings.py, you need to do the following:
-
- * Add snapboard to installed apps variable.
- * Add the following variables:
-
+Optionally, if you want the snapboard account registration application, you can add another symbolic link:
 {{{
-    SNAP_PREFIX = '/forums'
-    SNAP_MEDIA_PREFIX = MEDIA_URL + '/media'
+$ ln -s `pwd`/snapboard_trunk/sbreg /path/to/django/exampleproject
 }}}
-   
-   These manage the url mappings inside the views and templates.
 
- * Modify `MIDDLEWARE_CLASSES` to include snapboard middleware:
+== urls.py ==
+Edit your project urls (project/url.py):
+{{{
+ (r'^snapboard/', include('exampleproject.snapboard.urls')),
+}}}
 
+== settings.py ==
+Modify `MIDDLEWARE_CLASSES` to include snapboard middleware:
 {{{
 MIDDLEWARE_CLASSES = (
     ...
-
     # SNAPboard middleware
-    'examplesite.snapboard.middleware.threadlocals.ThreadLocals',
+    'exampleproject.snapboard.middleware.threadlocals.ThreadLocals',
 )
 }}}
 
- * To make sure that the two SNAP variables get processed correctly, you need to add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
-
+To make sure that the two SNAP variables get processed correctly, you need to add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
 {{{
-    'examplesite.snapboard.views.snapboard_default_context',
+TEMPLATE_CONTEXT_PROCESSORS = (
+    ...
+    # SNAPboard default context
+    'exampleproject.snapboard.views.snapboard_default_context',
 }}}
-
-   There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the following for snapboard:
+There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the following for snapboard:
 
 {{{
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -54,14 +51,41 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "examplesite.snapboard.views.snapboard_default_context",
 )
 }}}
+For more information, see the settings [http://www.djangoproject.com/documentation/settings/#template-context-processors documentation].
 
-    For more info, check out the settings [http://www.djangoproject.com/documentation/settings/#template-context-processors documentation].
+== Voila! ==
 
-4. Sync'd up the db.
+At this point, you can sync up and deploy.
+{{{
+$ cd /path/to/exampleproject; python manage.py syncdb
+}}}
 
-5. Run a local server via manage.py runserver.
 
-At this point, you should be able to log in and play around with the app.  Have fun.
+= Extra Customization =
+
+== URLs ==
+You don't have to use `/snapboard` as your base URL.  A good alternative is:
+{{{
+    # forums
+    (r'^forum/', include('webapps.snapboard.urls')),
+    (r'^forums/', include('webapps.snapboard.urls')),
+}}}
+
+But you need to set some additional SNAPboard variables in `settings.py` if you modify this:
+{{{
+SNAP_PREFIX = '/forums'    
+}}}
+
+== Media Files ==
+SNAPboard will accept an additional setting to specify a custom media location.  The default is:
+{{{
+SNAP_MEDIA_PREFIX = MEDIA_URL + '/media'
+}}}
+If that's okay, you don't need to do anything.  If you've moved the media files somewhere special, just set the above variable.
+
+== Templates ==
+*This section is incomplete*
+SNAPboard templates are designed to be as flexible as possible.  It is very easy to override them.
 
 
 
