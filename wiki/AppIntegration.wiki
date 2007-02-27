@@ -71,7 +71,7 @@ You don't have to use `/snapboard` as your base URL.  A good alternative is:
     (r'^forums/', include('webapps.snapboard.urls')),
 }}}
 
-But you need to set some additional SNAPboard variables in `settings.py` if you modify this:
+But you need to set some additional SNAPboard variables in `settings.py`, e.g. for the urls above, you would need to set `SNAP_PREFIX`
 {{{
 SNAP_PREFIX = '/forums'    
 }}}
@@ -86,7 +86,6 @@ If that's okay, you don't need to do anything.  If you've moved the media files 
 == Templates ==
 *This section is incomplete*
 SNAPboard templates are designed to be as flexible as possible.  It is very easy to override them.
-
 
 
 
