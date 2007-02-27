@@ -19,7 +19,7 @@ $ ln -s `pwd`/snapboard_trunk/sbreg /path/to/django/exampleproject
 }}}
 
 == urls.py ==
-Edit your project urls (project/url.py):
+Edit your project urls (exampleproject/url.py):
 {{{
  (r'^snapboard/', include('exampleproject.snapboard.urls')),
 }}}
@@ -34,25 +34,20 @@ MIDDLEWARE_CLASSES = (
 )
 }}}
 
-To make sure that the two SNAP variables get processed correctly, you need to add the following line to your TEMPLATE_CONTEXT_PROCESSORS variable:
-{{{
-TEMPLATE_CONTEXT_PROCESSORS = (
-    ...
-    # SNAPboard default context
-    'exampleproject.snapboard.views.snapboard_default_context',
-}}}
-There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the following for snapboard:
-
+To make sure that the two SNAP variables get processed correctly, you need to modify the `TEMPLATE_CONTEXT_PROCESSORS` setting^1^:
 {{{
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.auth",
     "django.core.context_processors.request",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
 
     # SNAPboard processors
     "examplesite.snapboard.views.snapboard_default_context",
 )
 }}}
-For more information, see the settings [http://www.djangoproject.com/documentation/settings/#template-context-processors documentation].
+
+   ^1^ There is a gotcha here; the default template context processors are `auth`, `debug`, `i18n`, and `request`.  When you set `TEMPLATE_CONTEXT_PROCESSORS` in your project settings file, the defaults are no longer applied.  At a _minimum_, you need the `auth` and `request`.  For more information, see the settings [http://www.djangoproject.com/documentation/settings/#template-context-processors documentation].
 
 == Voila! ==
 
@@ -87,5 +82,4 @@ If that's okay, you don't need to do anything.  If you've moved the media files 
 == Templates ==
 *This section is incomplete*
 SNAPboard templates are designed to be as flexible as possible.  It is very easy to override them.  We've tried to use the same template block variable names as the admin templates, so you should be comfortable doing small customizations.  Larger changes like layout changes should also be relatively straightforward.
-
 
