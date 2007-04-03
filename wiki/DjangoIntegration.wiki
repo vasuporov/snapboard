@@ -85,8 +85,8 @@ And add it to your list of installed applications (`settings.py`):
 == URLs ==
 You don't have to use `/snapboard` as your base URL.  A good alternative is:
 {{{
-    (r'^forum/', include('webapps.snapboard.urls')),
-    (r'^forums/', include('webapps.snapboard.urls')),
+    (r'^forum/', include('examplesite.snapboard.urls')),
+    (r'^forums/', include('examplesite.snapboard.urls')),
 }}}
 
 In this case, you need to set an additional snapboard variable in `settings.py`, e.g. for the urls above, you would need to set `SNAP_PREFIX` such that
