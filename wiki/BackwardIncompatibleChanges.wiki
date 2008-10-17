@@ -4,9 +4,9 @@
 
   * As of r182, integrated registration and user profile have disappeared. These may be available again soon. 
 
-  * The middleware classes for User and IP address bans are now 'snapboard.middleware.ban.IPBanMiddleware' and 'snapboard.middleware.ban.UserBanMiddleware'.
+  * The middleware classes for User and IP address bans are now 'snapboard.middleware.ban.IPBanMiddleware' and 'snapboard.middleware.ban.!UserBanMiddleware'.
   The models to support those bans have changed.
 
-  * The SnapboardProfile model has been changed to UserSettings, which only holds the user's preferences for board navigation.
+  * The !SnapboardProfile model has been changed to !UserSettings, which only holds the user's preferences for board navigation.
 
   * The SNAP_PREFIX setting has disappeared in favor of the more flexible named urls (http://docs.djangoproject.com/en/dev/topics/http/urls/#id2).
