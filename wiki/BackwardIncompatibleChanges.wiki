@@ -2,7 +2,7 @@
 
 = Revision 182 =
 
-  * As of r182, integrated registration and user profile have disappeared. These may be available again soon. 
+  * As of r182, integrated registration has been removed.  We recommend using an actively maintained and more full-featured registration application (such as django-registration).
 
   * The middleware classes for User and IP address bans are now 'snapboard.middleware.ban.IPBanMiddleware' and 'snapboard.middleware.ban.!UserBanMiddleware'.
   The models to support those bans have changed.
