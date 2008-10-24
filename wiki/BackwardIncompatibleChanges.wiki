@@ -1,5 +1,9 @@
 #summary This page lists backward incompatible changes in SNAPboard's development trunk
 
+= Revision 193 =
+
+  * [http://code.google.com/p/django-pagination/ django-pagination] is now an external dependency.
+
 = Revision 182 =
 
   * As of r182, integrated registration has been removed.  We recommend using an actively maintained and more full-featured registration application (such as django-registration).
