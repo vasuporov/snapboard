@@ -1,5 +1,8 @@
 #summary Overview of steps to integrate snapboard into an existing Django project
-#labels Featured,Phase-Deploy
+
+*This page is deprecated.  Please see the official documentation for setup instructions.*
+
+http://snapboard.deadpuck.net/docs/
 
 For comments, questions and concerns, please see the Google [http://groups.google.com/group/snapboard-discuss Group].
 
