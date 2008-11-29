@@ -1,0 +1,147 @@
+/* Global */
+
+.snapboard a {
+	text-decoration: none;
+	color: #099;
+}
+
+.snapboard a:active,
+.snpaboard a:hover {
+	text-decoration: underline;
+	color: #099;
+}
+
+.snapboard h1,
+.snapboard h2,
+.snapboard h3 {
+	background-color: #d9d4c3;
+	border-top: 1px solid #2f2f2f;
+	border-bottom: 1px solid #2f2f2f;
+	height: 34px;
+	margin-bottom: 0px;
+	padding-left: 10px;
+}
+
+/* Base template */
+
+.snapboard div#sb-header {
+	line-height: 1.2;
+	font-size: 2.5em;
+	margin-bottom: 18px;
+}
+
+.snapboard div#sb-footer {
+	text-align: center;
+	margin-top: 18px;
+}
+
+.snapboard div#sb-nav {
+	background-color: #ccdddd;
+	border-bottom: 1px solid #999;
+	-moz-border-radius-topright: 10px;
+	margin-bottom: 17px;
+}
+
+.snapboard div.sb-side-panel {
+	background-color: #ccdddd;
+	border-bottom: 1px solid #999;
+	margin-bottom: 17px;
+}
+
+.snapboard div.sb-side-panel > * {
+	padding-left: 4px;
+}
+
+.snapboard div.sb-side-panel input[type="text"],
+.snapboard div.sb-side-panel input[type="password"] {
+	width: 164px;
+}
+
+.snapboard div.sb-side-panel label {
+	display: block;
+}
+
+.snapboard div.sb-side-panel span.line {
+	display: block;
+	height: 36px;
+}
+
+/* Categories */
+
+.snapboard div.sb-tc-list {
+}
+
+.snapboard div.sb-tc-row {
+/*	background-color: #2f2f2f;
+	background-color: #d9d4c3;*/
+	background-color: #ccdddd;
+/*	color: white;*/
+	padding-left: 10px;
+/*	-moz-border-radius: 10px;*/
+	border-bottom: 1px solid #999;
+	height: 53px;
+}
+
+.snapboard div.sb-tc-row span.sb-title {
+	line-height: 1.6;
+	font-size: 1.5em;
+}
+
+.snapboard div.sb-tc-row a {
+/*	color: white;*/
+}
+
+/* Thread list */
+
+.snapboard div.sb-pages {
+	background-color: #d9d4c3;
+	border-bottom: 1px solid #2f2f2f;
+	height: 17px;
+	margin-bottom: 0px;
+/*	padding-left: 10px;*/
+}
+
+.snapboard div.sb-thread {
+	background-color: #ccdddd;
+/*	padding-left: 10px;*/
+	border-bottom: 1px solid #999;
+/*	height: 53px;*/
+	padding-top: 9px;
+	padding-bottom: 8px;
+}
+
+.snapboard div.sb-thread .thread-title {
+	font-weight: bold;
+	padding-left: 10px;
+	margin-right: 0px;
+}
+
+.snapboard div.sb-thread .thread-started-by {
+	color: #999;
+	text-align: right;
+}
+
+.snapboard div.sb-thread .thread-category {
+	padding-left: 10px;
+	margin-right: 0px;
+	color: #888;
+}
+
+.snapboard div.sb-thread .thread-last-message {
+	text-align: right;
+	color: #677;
+}
+
+.snapboard div.sb-thread .thread-last-message > span.right-spacer,
+.snapboard div.sb-thread .thread-started-by > span.right-spacer {
+	padding-right: 10px;
+}
+
+/* Thread */
+
+.small-title {
+	font-size:1.5em;
+	line-height:1em;
+	margin-bottom:1em;
+}
+

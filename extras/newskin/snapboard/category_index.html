@@ -1,0 +1,32 @@
+{% extends "snapboard/base_forum.html" %}
+{% load i18n %}
+
+{% block snapboard_main %}
+    <h2>
+        {% trans "Topics Category List" %}
+    </h2>
+    {% if cat_list %}
+        <div class="sb-tc-list">
+            {% for category in cat_list %}
+            <div class="sb-tc-row">
+                <span class="sb-title">
+                    <a href="{% url snapboard_category_thread_index category.id %}">{{ category.label }}</a>
+                </span>
+                <span>
+                    {% if category.moderators %}
+                        {% trans "moderators" %}:  {{ category.moderators }}
+                    {% endif %}
+                </span><br />
+                <span>
+                    {% blocktrans count category.thread_count as cnt %}{{ cnt }} discussion{% plural %}{{ cnt }} discussions{% endblocktrans %}
+                </span>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>{% trans "No categories are available." %}</p>
+    {% endif %}
+{% endblock %}
+{% comment %}
+vim: ai ts=4 sts=4 et sw=4 
+{% endcomment %}

@@ -1,0 +1,63 @@
+{% extends "snapboard/base_forum.html" %}
+{% load i18n pagination_tags %}
+{% load extras %}
+
+{% block snapboard_main %}
+    {% autopaginate threads user_settings.tpp %}
+    <h2>{{ title }}</h2>
+    <div class="sb-pages span-14">{% paginate %}</div>
+    {% if threads %}
+        {% for thread in threads %}
+        <div class="sb-thread span-14">
+            <div class="span-14 last">
+                <div class="thread-title span-9">
+                    {% if thread.gsticky %}
+                        {% trans "STICKY" %} 
+                    {% else %}
+                        {% if category and thread.csticky %}
+							{% trans "STICKY" %} 
+                        {% endif %}
+                    {% endif %}
+                    {% if thread.closed %}
+                        {% trans "CLOSED" %} 
+                    {% endif %}
+                    <a href="{% url snapboard_thread thread.id %}">{{ thread.subject }}</a>
+                </div>
+                <div class="thread-started-by span-5 last">
+                    <span class="right-spacer">
+                        {{ thread.post_count }} {% trans "posts started by" %} <b>{{ thread.starter }}</b>
+                    </span>
+                </div>
+            </div>
+            <div class="span-14 last">
+                <div class="thread-category span-6">
+                    {% if category %}
+                        &#xA0;
+                    {% else %}
+                        {% trans "category" %}:
+                        <a href="{% url snapboard_category_thread_index thread.category.id %}">
+                            {{ thread.category }}
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="thread-last-message span-8 last">
+                    <span class="right-spacer">
+                        {% trans "last updated" %}
+                        <span class="datetime">{{ thread.date|date:"r T" }}<span class="timestamp">{{ thread.date|timestamp }}</span></span>
+                        {% ifnotequal thread.last_poster thread.starter %}
+                            {% trans "by" %} {{ thread.last_poster }}
+                        {% endifnotequal %}
+                    </span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="sb-pages span-14">{% paginate %}</div>
+
+    {% else %}
+        <p>{% trans "No threads are available." %}</p>
+    {% endif %}
+{% endblock %}
+<!--
+vim: ai ts=4 sts=4 et sw=4 
+-->
