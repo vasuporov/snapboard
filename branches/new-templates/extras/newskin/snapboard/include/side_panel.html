@@ -1,0 +1,64 @@
+{% load i18n %}
+<div class="sb-side-panel span-4 last">
+    {% if user.is_authenticated %}
+        <p>
+	    {% url snapboard_edit_settings as settings_url %}
+	    {% blocktrans %}You are signed in as <a href="{{ settings_url }}">{{ user.username }}</a>{% endblocktrans %}
+            {% if user.is_staff %}
+            <b>{% trans "(STAFF)" %}</b>
+            {% endif %}
+        </p>
+	<p>
+		<a href="{{ LOGOUT_URL }}">{% trans "Sign out" %}</a>
+	</p>
+    {% else %}
+        <p>{% trans "You are not logged in." %}</p>
+        {% if form.has_errors %}
+	    <p>{% trans "Your username and password didn't match." %}</p>
+        {% endif %}
+
+	{% if login_form %}
+	    <form method="post" action="{{ LOGIN_URL }}">
+		<input type="hidden" name="next" value="{{ request.path }}" />
+		<label for="id_username">{% trans "Username:" %}</label>
+		<span class="line"><input id="id_username" type="text" name="username" maxlength="30" /></span>
+		<label for="id_password">{% trans "Password:" %}</label>
+		<span class="line"><input id="id_password" type="password" name="password" maxlength="30" /></span>
+		<span class="line"><input type="submit" value="{% trans "Sign In" %}" /></span>
+	    </form>
+	{% endif %}
+
+        <p>{% trans "You need to have a user account in order to contribute to discussions on this forum." %}</p>
+        <p><a href="/accounts/register/">{% trans "Create an account" %}</a></p>
+    {% endif %}
+</div>
+
+{% if user.is_staff %}
+    <br />
+    <div class="forummenu">
+    <p><b>{% trans "Admin Shortcuts" %}</b></p>
+    <br />
+    <ul>
+        <li>&#187; <b><a href="/admin/">{% trans "Admin Site" %}</a></b></li>
+        <li>&#187; <a href="/admin/snapboard/post/?censor__exact=1">{% trans "Censored posts" %}</a></li>
+        <li>&#187; <a href="/admin/snapboard/abusereport/">{% trans "Abuse Reports" %}</a></li>
+        <li>&#187; <a href="/admin/snapboard/thread/?csticky__exact=1">{% trans "Category Sticky" %}</a></li>
+        <li>&#187; <a href="/admin/snapboard/thread/?gsticky__exact=1">{% trans "Global Sticky" %}</a></li>
+    </ul>
+    </div>
+{% endif %}
+
+{% if user.is_authenticated %}
+    <!-- br />
+    <div class="forummenu">
+    <ul>
+        <li>&#187; <a href="#">Watched Topics<b></a> <br /> <a href="#">(2 new!)</b></a></li>
+        <li>&#187; <a href="#">Private Posts<b></a> <br /> <a href="#">(4 new!)</b></a></li>
+    </ul>
+    </div -->
+    
+    <br />
+    <div class="forummenu">
+	<p><b><a href="{% url snapboard_edit_settings %}">{% trans "Forum Preferences" %}</a></b></p>
+    </div>
+{% endif %}
